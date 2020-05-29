@@ -61,8 +61,5 @@
   "peerDependencies": {
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.1"
-  },
-  "dependencies": {
-    "pdfjs-dist": "^2.2.228"
   }
 }
