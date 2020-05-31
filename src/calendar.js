@@ -169,7 +169,7 @@ export default class Calendar extends LitElement {
     return this.__dayNums.map((num, index) =>
       (this.isValidDayNum(num)
         ? this.renderDay(num, index)
-        : html`<div></div>`))
+        : this.renderPlaceholder(index)))
   }
 
   renderHeader () {
@@ -189,6 +189,12 @@ export default class Calendar extends LitElement {
   renderDay (num, _index) {
     return html`
       <span .num="${num}">${num}</span>
+    `
+  }
+
+  renderPlaceholder (_index) {
+    return html`
+      <div></div>
     `
   }
 
