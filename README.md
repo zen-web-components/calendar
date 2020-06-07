@@ -1,4 +1,4 @@
-# zensen-calendar
+# @zen-web-components/calendar
 
 A headless calendar component for LitElement.
 
