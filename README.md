@@ -12,13 +12,13 @@ A headless calendar component for LitElement.
 Using `npm`:
 
 ```
-$ npm install @zensen/calendar
+$ npm install @zen-web-components/calendar
 ```
 
 Using `yarn`:
 
 ```
-$ yarn add @zensen/calendar
+$ yarn add @zen-web-components/calendar
 ```
 
 ## API
