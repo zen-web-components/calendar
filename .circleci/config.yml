@@ -4,7 +4,7 @@ orbs:
 jobs:
   build-and-test:
     environment:
-      - image: circleci/node:6
+      - image: circleci/node:6-browsers
         CHROME_BIN: "/usr/bin/google-chrome"
     executor:
       name: node/default
