@@ -4,7 +4,7 @@ orbs:
 jobs:
   build-and-test:
     docker:
-      - image: circleci/node:6-browsers
+      - image: circleci/node:jessie-browsers
         environment:
           CHROME_BIN: "/usr/bin/google-chrome"
     executor:
