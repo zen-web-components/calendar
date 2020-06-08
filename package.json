@@ -20,7 +20,7 @@
     "storybook": "start-storybook -p 9001",
     "storybook:build": "build-storybook -o _site -s storybook-static",
     "site:build": "npm run storybook:build",
-    "test": "echo $CHROME_BIN; ls /usr/bin/google-chrome; karma start --single-run --coverage",
+    "test": "which google-chrome; karma start --single-run --coverage",
     "test:watch": "karma start  --coverage --auto-watch"
   },
   "keywords": [
