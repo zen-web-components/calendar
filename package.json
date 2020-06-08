@@ -20,8 +20,8 @@
     "storybook": "start-storybook -p 9001",
     "storybook:build": "build-storybook -o _site -s storybook-static",
     "site:build": "npm run storybook:build",
-    "test": "which google-chrome; karma start --single-run --coverage",
-    "test:watch": "karma start  --coverage --auto-watch"
+    "test": "karma start --single-run --coverage",
+    "test:watch": "karma start  --coverage --auto-watch --single-run=false"
   },
   "keywords": [
     "calendar",

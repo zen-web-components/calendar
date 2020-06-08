@@ -1,7 +1,5 @@
 import Calendar from '../src/calendar'
 
-import { html } from 'lit-element'
-
 import { sinon, expect, genSuite } from './helpers'
 
 const NAME = 'someName'
@@ -9,24 +7,9 @@ const NOW = new Date('2019-12-01T00:00:00')
 
 let clock
 let onChangeSpy
+let onChangeDisplaySpy
 
-const REFS = {
-  daySpots: 'day-',
-}
-
-window.customElements.define('neb-calendar-test', class extends Calendar {
-  static get refs () { return REFS }
-
-  renderDay (num, index) {
-    return html`
-      <span
-        id="${REFS.daySpots}-${index}"
-        .num="${num}"
-        @click="${this.handlers.selectDate}"
-      >${num}</span>
-    `
-  }
-})
+window.customElements.define('neb-calendar-test', class extends Calendar {})
 
 genSuite('neb-calendar-test', {
   onBegan: () => {
@@ -36,6 +19,7 @@ genSuite('neb-calendar-test', {
     meta.instance.name = NAME
 
     onChangeSpy = meta.sandbox.spy(meta.instance, 'onChange')
+    onChangeDisplaySpy = meta.sandbox.spy(meta.instance, 'onChangeDisplay')
   },
   onFinish: () => {
     clock.restore()
@@ -154,7 +138,48 @@ genSuite('neb-calendar-test', {
     })
   })
 
-  describe('isValidDayNum', () => {
+  context('when changing the header', () => {
+    beforeEach(async () => {
+      meta.instance.handlers.changeHeader(NOW)
+
+      await meta.updateComplete()
+    })
+
+    it('invokes the callback', () =>
+      expect(onChangeDisplaySpy).to.be.calledOnceWith(NAME, NOW))
+  })
+
+  context('when selecting today', () => {
+    beforeEach(async () => {
+      meta.instance.handlers.selectToday()
+
+      await meta.updateComplete()
+    })
+
+    it('invokes the callback', () =>
+      expect(onChangeSpy).to.be.calledOnceWith(NAME, NOW))
+  })
+
+  describe('getDate()', () => {
+    const DAY_NUM = 15
+
+    let result
+    let expectedValue
+
+    beforeEach(async () => {
+      expectedValue = new Date(NOW)
+      expectedValue.setDate(DAY_NUM)
+
+      result = meta.instance.getDate(DAY_NUM)
+
+      await meta.updateComplete()
+    })
+
+    it('returns the date with selected day of month', () =>
+      expect(result).to.be.eql(expectedValue))
+  })
+
+  describe('isValidDayNum()', () => {
     it('is not valid when zero is passed', () =>
       expect(meta.instance.isValidDayNum(0)).to.be.false)
 

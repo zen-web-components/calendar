@@ -2,7 +2,13 @@ import { LitElement, html, css } from 'lit-element'
 
 export const DAY_SYMBOLS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 
+export const REFS = {
+  daySpots: 'day-',
+}
+
 export default class Calendar extends LitElement {
+  static get refs () { return REFS }
+
   static get properties () {
     return {
       name: String,
@@ -186,9 +192,13 @@ export default class Calendar extends LitElement {
     `
   }
 
-  renderDay (num, _index) {
+  renderDay (num, index) {
     return html`
-      <span .num="${num}">${num}</span>
+      <span
+        id="${REFS.daySpots}-${index}"
+        .num="${num}"
+        @click="${this.handlers.selectDate}"
+      >${num}</span>
     `
   }
 

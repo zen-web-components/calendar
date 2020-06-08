@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import _sinon from 'sinon'
 import chaiAsPromised from 'chai-as-promised'
 
@@ -10,6 +12,7 @@ import {
 } from '@open-wc/testing'
 
 chai.use(require('sinon-chai'))
+
 chai.use(chaiAsPromised)
 
 export const sinon = _sinon
