@@ -1,17 +1,4 @@
 const createDefaultConfig = require('@open-wc/testing-karma/default-config')
-const merge = require('deepmerge')
+const build = require('@zen-web-components/unit-test-helper/karma')
 
-module.exports = config => {
-  config.set(
-    merge(createDefaultConfig(config), {
-      files: [
-        { pattern: config.grep ? config.grep : 'test/**/*.test.js', type: 'module' },
-      ],
-      esm: {
-        nodeResolve: true,
-      },
-    }),
-  )
-
-  return config
-}
+module.exports = build(createDefaultConfig)

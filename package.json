@@ -36,6 +36,7 @@
     "@open-wc/testing": "^0.11.4",
     "@open-wc/testing-karma": "^1.1.1",
     "@zen-web-components/eslint-config": "^1.0.3",
+    "@zen-web-components/unit-test-helper": "^1.0.7",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "deepmerge": "^4.2.2",
@@ -48,10 +49,7 @@
     "lit-html": "^1.1.1",
     "mocha": "^6.1.3",
     "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0",
-    "webpack": "^4.28.1",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "sinon-chai": "^3.5.0"
   },
   "peerDependencies": {
     "lit-element": "^2.2.1",

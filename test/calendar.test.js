@@ -1,6 +1,6 @@
 import Calendar from '../src/calendar'
 
-import { sinon, expect, genSuite } from './helpers'
+import { sinon, expect, genSuite } from '@zen-web-components/unit-test-helper'
 
 const NAME = 'someName'
 const NOW = new Date('2019-12-01T00:00:00')
@@ -11,7 +11,7 @@ let onChangeDisplaySpy
 
 window.customElements.define('neb-calendar-test', class extends Calendar {})
 
-genSuite('neb-calendar-test', {
+genSuite('neb-calendar-test', false, {
   onBegan: () => {
     clock = sinon.useFakeTimers(NOW)
   },
