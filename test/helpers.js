@@ -1,4 +1,7 @@
 import _sinon from 'sinon'
+import chaiAsPromised from 'chai-as-promised'
+
+import { chai } from '@bundled-es-modules/chai'
 
 import {
   fixture,
@@ -6,10 +9,15 @@ import {
   html as _html,
 } from '@open-wc/testing'
 
+chai.use(require('sinon-chai'))
+chai.use(chaiAsPromised)
+
 export const sinon = _sinon
 export const expect = _expect
 export const html = _html
 export const wait = ms => Promise.resolve(resolve => setTimeout(resolve, ms))
+
+document.documentElement.style.fontSize = '62.5%'
 
 function getBaseClass (element) {
   return Object.getPrototypeOf(element.constructor)
@@ -55,6 +63,37 @@ async function genTestData (componentName) {
   }
 }
 
+function genBeforeEach (componentName, meta, onBegan, onStart) {
+  beforeEach(async () => {
+    meta.sandbox = sinon.createSandbox()
+
+    if (onBegan) {
+      onBegan(meta)
+    }
+
+    const result = await genTestData(componentName)
+    meta.instance = result.instance
+    meta.elements = result.elements
+    meta.updateComplete = result.updateComplete
+
+    if (onStart) {
+      onStart(meta)
+    }
+
+    await meta.updateComplete()
+  })
+}
+
+function genAfterEach (meta, onFinish) {
+  afterEach(() => {
+    meta.sandbox.restore()
+
+    if (onFinish) {
+      onFinish(meta)
+    }
+  })
+}
+
 export function genSuite (componentName, { onBegan, onStart, onFinish }, callback) {
   const meta = {
     sandbox: null,
@@ -64,32 +103,8 @@ export function genSuite (componentName, { onBegan, onStart, onFinish }, callbac
   }
 
   describe(componentName, () => {
-    beforeEach(async () => {
-      meta.sandbox = sinon.createSandbox()
-
-      if (onBegan) {
-        onBegan(meta)
-      }
-
-      const result = await genTestData(componentName)
-      meta.instance = result.instance
-      meta.elements = result.elements
-      meta.updateComplete = result.updateComplete
-
-      if (onStart) {
-        onStart(meta)
-      }
-
-      await meta.updateComplete()
-    })
-
-    afterEach(() => {
-      meta.sandbox.restore()
-
-      if (onFinish) {
-        onFinish(meta)
-      }
-    })
+    genBeforeEach(componentName, meta, onBegan, onStart)
+    genAfterEach(meta, onFinish)
 
     it('renders', () => expect(meta.instance.shadowRoot).to.exist)
 
