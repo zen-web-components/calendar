@@ -3,9 +3,10 @@ orbs:
   node: circleci/node@1.1.6
 jobs:
   build-and-test:
-    environment:
+    docker:
       - image: circleci/node:6-browsers
-        CHROME_BIN: "/usr/bin/google-chrome"
+        environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
     executor:
       name: node/default
     steps:
