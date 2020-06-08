@@ -20,7 +20,7 @@
     "storybook": "start-storybook -p 9001",
     "storybook:build": "build-storybook -o _site -s storybook-static",
     "site:build": "npm run storybook:build",
-    "test": "karma start --single-run --coverage",
+    "test": "echo $CHROME_BIN; ls /usr/bin/google-chrome; karma start --single-run --coverage",
     "test:watch": "karma start  --coverage --auto-watch"
   },
   "keywords": [
@@ -39,6 +39,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "deepmerge": "^4.2.2",
+    "eslint": "^7.2.0",
     "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^4.2.0",
     "karma-chai": "^0.1.0",
