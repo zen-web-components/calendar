@@ -9,9 +9,9 @@ let clock
 let onChangeSpy
 let onChangeDisplaySpy
 
-window.customElements.define('neb-calendar-test', class extends Calendar {})
+window.customElements.define('zen-calendar-test', class extends Calendar {})
 
-genSuite('neb-calendar-test', false, {
+genSuite('zen-calendar-test', false, {
   onBegan: () => {
     clock = sinon.useFakeTimers(NOW)
   },
